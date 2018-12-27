@@ -69,7 +69,7 @@
 
 /*  function        int WaitForNextMinute( void )
 
-    brief           waits for the next minute to begin
+    brief           waits for the next minute to half over
 
     return          int, 0 if timed out
 */
@@ -80,7 +80,7 @@ int WaitForNextMinute( void )
         {
         sleep(5);
         t = time(0) % 60;
-        if( t < 5 )
+        if( ( t >= 30 ) && ( t < 35 ) )
             return 0;
         }
     }
