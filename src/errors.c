@@ -95,6 +95,9 @@ void error( ERRNO err )
     int idx;
     int count;
 
+    if( err == 0 )                                                              // no error - no output
+        return;
+
     idx = (int)err * -1;                                                        // switch error code to index into the text array
     if( idx < 0 )                                                               // just in case
         {

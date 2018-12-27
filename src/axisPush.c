@@ -56,6 +56,7 @@
 
 
 #include <unistd.h>
+#include <time.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -64,6 +65,25 @@
 #include "getargs.h"
 #include "http.h"
 #include "ftp.h"
+
+
+/*  function        int WaitForNextMinute( void )
+
+    brief           waits for the next minute to begin
+
+    return          int, 0 if timed out
+*/
+int WaitForNextMinute( void )
+    {
+    time_t t;
+    for( ; ; )
+        {
+        sleep(5);
+        t = time(0) % 60;
+        if( t < 5 )
+            return 0;
+        }
+    }
 
 
 /*  function        int main( int argc, char *argv[] )
@@ -109,11 +129,16 @@ int main( int argc, char *argv[] )
         return result;
         }
 
-    result = PullFile(&image);
-    error(result);
+    for( ; ; )
+        {
+        result = PullFile(&image);
+        error(result);
 
-    result = PushFile(&image);
-    error(result);
+        result = PushFile(&image);
+        error(result);
+
+        WaitForNextMinute();
+        }
 
     FtpCleanup();
 
