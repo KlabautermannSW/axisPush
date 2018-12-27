@@ -24,3 +24,21 @@ So I decided to write a little program dong the work the camera will not do.
 
 The program uses the curl library and some of the experiences I made with my
 program [weather23k](https://github.com/KlabautermannSW/weather23k).
+
+```
+$ bin/axisPush -h
+
+axisPush V1.00 (c) Uwe Jantzen (Klabautermann-Software) Dec 27 2018
+
+Usage:
+        axisPush [options] [<configuration file>]
+Options:
+        -d            debug, show more data (eg. ftp ...)
+        -h            show this help then stop without doing anything more
+        -c            start the password encoder
+
+If no configuration file name is given the file "conf/axisPush.conf" is used.
+```
+
+There is no encoder/decoder given. You may add your own preferred algorithm to
+the functions.
