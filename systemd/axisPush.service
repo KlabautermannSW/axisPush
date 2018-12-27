@@ -1,0 +1,22 @@
+#################################################################
+#
+# axisPush.service
+# systemd service: start axisPush at start
+#
+#################################################################
+
+[Unit]
+Description=Start axisPush
+
+[Service]
+# Type=oneshot : starts the program once, that's it
+# Type=simple : default, necessary when using "Restart"
+Type=simple
+ExecStart=/home/<user>/axisPush/bin/axisPush /home/<user>/axisPush/conf/axisPush.conf
+# Restart=always : starts the program at once if it was finished in any way !!!
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
+# EOF
