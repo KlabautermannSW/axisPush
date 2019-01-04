@@ -29,7 +29,7 @@
 
     file        errors.c
 
-    date        27.12.2018
+    date        04.01.2019
 
     author      Uwe Jantzen (jantzen@klabautermann-software.de)
 
@@ -79,6 +79,7 @@ static char * errors[] =
     "Could not perfor CURL call",
     "",
     "",
+    "Timer second not in [0..59]",
     0
     };
 

@@ -29,7 +29,7 @@
 
     file        data.h
 
-    date        26.12.2018
+    date        04.01.2019
 
     author      Uwe Jantzen (jantzen@klabautermann-software.de)
 
@@ -74,6 +74,7 @@ extern char * user_key( void );
 extern char * ftp_path( void );
 extern char * http_server( void );
 extern char * http_path( void );
+extern int get_second( void );
 extern ERRNO Init( void );
 extern void DeInit( void );
 

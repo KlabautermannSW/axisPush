@@ -29,7 +29,7 @@
 
     file        data.c
 
-    date        27.12.2018
+    date        04.01.2019
 
     author      Uwe Jantzen (jantzen@klabautermann-software.de)
 
@@ -71,6 +71,7 @@ static char * the_ftp_path = 0;
 static char * the_key = 0;
 static char * the_http_server = 0;
 static char * the_http_path = 0;
+static int the_second = 0;
 
 
 /*  function        void set_debug( char set )
@@ -178,6 +179,18 @@ char * http_server( void )
 char * http_path( void )
     {
     return the_http_path;
+    }
+
+
+/*  function        int get_second( void )
+
+    brief           returns the second in a minute when to start image transfer
+
+    return          int, the second
+*/
+int get_second( void )
+    {
+    return the_second;
     }
 
 
@@ -382,6 +395,16 @@ ERRNO Init( void )
             if( !the_http_path )
                 error = ERR_OUT_OF_MEMORY;
             strcpy(the_http_path, val);
+            }
+        else if( (strcmp(section, "Timer") == 0) && (strcmp(key, "s") == 0) )
+            {
+            int s;
+
+            sscanf(val, "%d", &s);
+            if( ( s >= 0 ) && ( s < 60 ) )
+                the_second = s;
+            else
+                error = ERR_ILL_TIMER_SECOND;
             }
         key[0] = 0;
         }

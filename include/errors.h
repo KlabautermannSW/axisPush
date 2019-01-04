@@ -29,7 +29,7 @@
 
     file        errors.h
 
-    date        27.12.2018
+    date        04.1..2019
 
     author      Uwe Jantzen (jantzen@klabautermann-software.de)
 
@@ -76,6 +76,7 @@
 #define ERR_CURL_PERFORM_ERROR                  -20
 #define ERR_RESET_COMMUNICATION                 -21
 #define ERR_NO_FTP_SERVER                       -22
+#define ERR_ILL_TIMER_SECOND                    -23
 
 
 typedef int ERRNO;

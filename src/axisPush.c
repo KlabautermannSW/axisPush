@@ -76,11 +76,13 @@
 int WaitForNextMinute( void )
     {
     time_t t;
+    int s = get_second();
+
     for( ; ; )
         {
         sleep(5);
         t = time(0) % 60;
-        if( ( t >= 30 ) && ( t < 35 ) )
+        if( ( t >= s ) && ( t < (s + 5) ) )
             return 0;
         }
     }

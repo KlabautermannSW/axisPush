@@ -42,6 +42,78 @@ Options:
 If no configuration file name is given the file "conf/axisPush.conf" is used.
 ```
 
+## The Configuration file
+The configuration file has several sections that are described in the next paragraphs.
+A line beginning with the “#” character is interpreted as a single line comment.
+### [FTP]
+This describes the handling and use of the ftp server.
+```
+server =
+user =
+key =
+path =
+```
+All data are encoded using the encode fucntion.
+
+#### server
+This is the server string as used for the ftp server connection.
+
+Example:
+
+`myspace.example.com`
+
+#### user
+
+The ftp account’s name.
+
+#### key
+
+The ftp account’s password.
+
+#### path
+
+The image to be pushed to the ftp server. This needs complete path and filename
+starting from the root directory of your ftp server.
+
+Example:
+
+`/image.jpg`
+
+### [HTTP]
+This describes the handling and use of the http web server.
+```
+server =
+path =
+```
+All data are encoded using the encode fucntion.
+
+#### server
+This is the server string as used for the http server connection.
+
+Example:
+
+`192.160.0.200`
+
+#### path
+
+The image to be read from the camnera. This needs complete path and filename
+starting from the root directory of your axis camera.
+
+Example:
+
+`axis-cgi/jpg/image.cgi?resolution=640x480`
+
+### [Timer]
+
+```
+s = 0
+```
+
+#### s
+
+This is the second in every minute when the transfer is started. Range for the
+start second is from s to s+4.
+
 ### Using the program as a systemd service
 
 First you need a service file at /usr/lib/systemd/system named axisPush.service. A sample can be found in the dirctory systemd.

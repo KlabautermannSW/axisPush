@@ -27,7 +27,7 @@
 #
 #   file        Makefile
 #
-#   date        26.12.2018
+#   date        04.01.2019
 #
 #   author      Uwe Jantzen (jantzen@klabautermann-software.de)
 #
@@ -88,15 +88,15 @@ ftp.o : ftp.c ftp.h data.h debug.h
 
 http.o : http.c http.h data.h debug.h
 
-getargs.o : getargs.c data.h password.h getargs.h debug.h
+getargs.o : getargs.c password.h getargs.h data.h
 
-data.o : data.c data.h password.h debug.h
+data.o : data.c data.h password.h
 
-password.o : password.c password.h debug.h
+password.o : password.c password.h
 
-errors.o : errors.c errors.h data.h debug.h
+errors.o : errors.c errors.h data.h
 
-debug.o : debug.c debug.h
+debug.o : debug.c data.h debug.h
 
 ####### create object and executable directory if missing
 install:
