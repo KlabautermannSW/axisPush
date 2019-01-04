@@ -43,9 +43,12 @@ If no configuration file name is given the file "conf/axisPush.conf" is used.
 ```
 
 ## The Configuration file
+
 The configuration file has several sections that are described in the next paragraphs.
 A line beginning with the “#” character is interpreted as a single line comment.
+
 ### [FTP]
+
 This describes the handling and use of the ftp server.
 ```
 server =
@@ -77,9 +80,10 @@ starting from the root directory of your ftp server.
 
 Example:
 
-`/image.jpg`
+`camdir/image.jpg`
 
 ### [HTTP]
+
 This describes the handling and use of the http web server.
 ```
 server =
@@ -88,6 +92,7 @@ path =
 All data are encoded using the encode fucntion.
 
 #### server
+
 This is the server string as used for the http server connection.
 
 Example:
@@ -96,7 +101,7 @@ Example:
 
 #### path
 
-The image to be read from the camnera. This needs complete path and filename
+The image to be read from the camera. This needs complete path and filename
 starting from the root directory of your axis camera.
 
 Example:
@@ -116,7 +121,10 @@ start second is from s to s+4.
 
 ### Using the program as a systemd service
 
-First you need a service file at /usr/lib/systemd/system named axisPush.service. A sample can be found in the dirctory systemd.
+**Everything in this paragraf has to be done with superuser rights!**
+
+First you need a service file at /usr/lib/systemd/system named axisPush.service.
+A sample can be found in the dirctory systemd.
 
 Then set the security flags as follows:
 ```
