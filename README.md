@@ -16,7 +16,7 @@ factory default nothing worked better. Also using a script and the scheduler
 does not result in a picture on the web server.
 
 But I have some [Raspberry Pis](http://www.raspberrypi.org/) working on weather
-data logging what is a boring and very small job to do for a linux cumputer.
+data logging what is a boring and very small job to do for a linux computer.
 
 So I decided to write a little program doing the work the cameras will not do.
 
@@ -42,7 +42,7 @@ Options:
 If no configuration file name is given the file "conf/axisPush.conf" is used.
 ```
 
-## The Configuration file
+## The Configuration File
 
 The configuration file has several sections that are described in the next paragraphs.
 A line beginning with the “#” character is interpreted as a single line comment.
@@ -119,12 +119,12 @@ s = 0
 This is the second in every minute when the transfer is started. Range for the
 start second is from s to s+4.
 
-### Using the program as a systemd service
+## Using The Program As A Systemd Service
 
-**Everything in this paragraf has to be done with superuser rights!**
+**Everything in this paragraph has to be done with superuser rights!**
 
 First you need a service file at /usr/lib/systemd/system named axisPush.service.
-A sample can be found in the dirctory systemd.
+A sample can be found in the directory systemd.
 
 Then set the security flags as follows:
 ```
