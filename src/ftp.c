@@ -51,6 +51,7 @@
 
 
 #include <curl/curl.h>
+#include <stdlib.h>
 #include <string.h>
 #include "ftp.h"
 #include "debug.h"
@@ -154,6 +155,8 @@ ERRNO PushFile( Memory * image )
         error = ERR_CURL_PERFORM_ERROR;
     debug("Curl performed\n");
     image->memory = p_memory;                                                   // restore memory pointer
+
+    free(image->memory);
 
 setopt_PushFile:
     curl_easy_cleanup(curl);                                                    // always cleanup

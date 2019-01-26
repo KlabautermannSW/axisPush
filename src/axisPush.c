@@ -144,8 +144,6 @@ int main( int argc, char *argv[] )
 
     FtpCleanup();
 
-    free(image.memory);
-
     DeInit();
 
     return result;
