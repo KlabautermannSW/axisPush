@@ -121,7 +121,15 @@ start second is from s to s+4.
 
 ## Using The Program As A Systemd Service
 
-**Everything in this paragraph has to be done with superuser rights!**
+### Important !!
+
+**_Before you use the sample service configuration file check out that there will be no error
+whenn calling the program with your configuration. If an error occurs the systemd
+service will recall the program immediately over and over again!_**
+
+### Setting The Service
+
+_Everything in this paragraph has to be done with superuser rights!_
 
 First you need a service file at /usr/lib/systemd/system named axisPush.service.
 A sample can be found in the directory systemd.
