@@ -123,8 +123,8 @@ start second is from s to s+4.
 
 ### Important !!
 
-**_Before you use the sample service configuration file check out that there will be no error
-whenn calling the program with your configuration. If an error occurs the systemd
+**_Before you use the sample service configuration file check out that there will
+be no errors when calling the program with your configuration. If an error occurs the systemd
 service will recall the program immediately over and over again!_**
 
 ### Setting The Service
