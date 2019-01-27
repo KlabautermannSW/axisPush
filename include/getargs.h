@@ -29,7 +29,7 @@
 
     file        getargs.h
 
-    date        26.12.2018
+    date        27.1.2019
 
     author      Uwe Jantzen (jantzen@klabautermann-software.de)
 
@@ -55,7 +55,7 @@
 #include "errors.h"
 
 
-extern ERRNO handle_arg( char * str );
+extern void handle_arg( char * str );
 
 
 #endif  // __GETARGS_H__

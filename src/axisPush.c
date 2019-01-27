@@ -111,23 +111,20 @@ int main( int argc, char *argv[] )
     if( argc > 0 )
         {
         for( i = 1; i < argc; ++i )
-            {
-            result = handle_arg(argv[i]);
-            if( result )
-                printf("Error in command line argument : %s\n", argv[i]);
-            }
+            handle_arg(argv[i]);                                                // exits on argument error
         }
 
     result = Init();
     if( result )
         {
-        printf("General initialization error : %d, programm exiting!\n", result);
+        error(result);
         return result;
         }
+
     result = FtpInit();
     if( result )
         {
-        printf("FTP initialization error : %d, programm exiting!\n", result);
+        error(result);
         return result;
         }
 

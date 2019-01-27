@@ -29,7 +29,7 @@
 
     file        errors.h
 
-    date        04.1..2019
+    date        27.1.2019
 
     author      Uwe Jantzen (jantzen@klabautermann-software.de)
 

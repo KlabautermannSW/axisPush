@@ -29,7 +29,7 @@
 
     file        password.c
 
-    date        27.12.2018
+    date        27.1.2019
 
     author      Uwe Jantzen (jantzen@klabautermann-software.de)
 
@@ -55,6 +55,7 @@
 */
 
 
+#include <stdlib.h>
 #include <ctype.h>
 #include <stdio.h>
 #include <malloc.h>
@@ -62,18 +63,19 @@
 #include "password.h"
 
 
-/*  function        ERRNO encode( void )
+/*  function        void encode( void )
 
-    brief           encodes the string typed in by the user to the value to be
-                    stored in the .ini-file
+    brief           Encodes the string typed in by the user to the value to be
+                    stored in the .ini file.
 
-    return          ERRNO
+                    Exits the program always!
 */
-ERRNO encode( void )
+void encode( void )
     {
+    ERRNO err = NOERR;
     printf("Please enter the string to be encoded:\n");
 
-    return NOERR;
+    exit(err);
     }
 
 

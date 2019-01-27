@@ -29,7 +29,7 @@
 
     file        getargs.c
 
-    date        26.12.2018
+    date        27.1.2019
 
     author      Uwe Jantzen (jantzen@klabautermann-software.de)
 
@@ -55,17 +55,17 @@
 #include "getargs.h"
 
 
-/*  function        ERRNO handle_arg( char * str )
+/*  function        void handle_arg( char * str )
 
-    brief           handle command line arguments
+    brief           Handle command line arguments.
+
+                    Exits the aprogram on error always!
 
     param[in]       char * str
-
-    return          ERRNO
 */
-ERRNO handle_arg( char * str )
+void handle_arg( char * str )
     {
-    ERRNO error = NOERR;
+    ERRNO err = NOERR;
     int len = 0;
 
     if( *str == '-' )
@@ -88,24 +88,25 @@ ERRNO handle_arg( char * str )
                     printf("\n        -c            start the password encoder");
                     printf("\n\nIf no configuration file name is given the file \"conf/axisPush.conf\" is used.");
                     printf("\n\n");
-                    exit(error);
+                    exit(err);
                     break;
                 case 'c' :
-                    error = encode();
-                    if( error != NOERR )
-                        printf("password coding failed!\n");
-                    exit(error);
+                    encode();
                     break;
                 default :
-                    error = ERR_ILLEGAL_COMMANDLINE_ARGUMENT;
+                    err = ERR_ILLEGAL_COMMANDLINE_ARGUMENT;
                     break;
                 }
             }
         else
-            error = ERR_ILLEGAL_COMMANDLINE_ARGUMENT;
+            err = ERR_ILLEGAL_COMMANDLINE_ARGUMENT;
         }
     else
-        set_ini_file(str);
+        err = set_ini_file(str);
 
-    return error;
+    if( err )
+        {
+        error(err);
+        exit(err);
+        }
     }

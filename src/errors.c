@@ -29,7 +29,7 @@
 
     file        errors.c
 
-    date        04.01.2019
+    date        27.1.2019
 
     author      Uwe Jantzen (jantzen@klabautermann-software.de)
 
@@ -50,6 +50,7 @@
 
 
 #include <stdio.h>
+#include <string.h>
 #include "errors.h"
 #include "data.h"
 
@@ -64,29 +65,29 @@ static char * errors[] =
     "configuration file : illegal key line",
     "configuration file : illegal key",
     "out of memory",
-    "No string given",
+    "no string given",
     "",
-    "",
+    "",                                                                         // 10
     "",
     "Could not open file",
     "",
     "",
+    "illegal command line argument",
+    "Curl initialization errer",
     "",
     "",
+    "Curl setup failed",
+    "could not perfor CURL call",                                               // 20
     "",
-    "",
-    "",
-    "Could not perfor CURL call",
-    "",
-    "",
-    "Timer second not in [0..59]",
+    "no ftp server named",
+    "timer second not in [0..59]",
     0
     };
 
 
 /*  function        void error( ERRNO err )
 
-    brief           Prints a brief description of error "err" to stdout.
+    brief           Prints a brief description of error "err" to stderr.
 
     param[in]       ERRNO err, code of error to describe.
 
@@ -99,12 +100,13 @@ void error( ERRNO err )
     if( err == 0 )                                                              // no error - no output
         return;
 
-    idx = (int)err * -1;                                                        // switch error code to index into the text array
-    if( idx < 0 )                                                               // just in case
+    if( err > 0 )                                                               // error from system or library
         {
-        fprintf(stderr, "Error %3d --- This is an implementation bug! Error code should NOT be positive!\n", err);
+        fprintf(stderr, "Error %d: %s\n", err, strerror(err));
         return;
         }
+
+    idx = (int)err * -1;                                                        // switch error code to index into the text array
 
     for( count = 0; errors[count]; ++count )
         {

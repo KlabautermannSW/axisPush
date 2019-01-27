@@ -111,10 +111,7 @@ ERRNO PullFile( Memory * image )
         // Grab image
         res = curl_easy_perform(curl_handle);
         if( res )
-            {
-            error(ERR_CURL_PERFORM_ERROR);
             return ERR_CURL_PERFORM_ERROR;
-            }
         }
         curl_easy_cleanup(curl_handle);
 

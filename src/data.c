@@ -107,9 +107,23 @@ char is_debug( void )
 
     param[in]       char * ini_file_name
 */
-void set_ini_file( char * ini_file_name )
+ERRNO set_ini_file( char * ini_file_name )
     {
-    the_init_file_name = ini_file_name;
+    ERRNO err = NOERR;
+    size_t len = 0;
+
+    if( !ini_file_name )
+        return err;
+    if( *ini_file_name )
+        {
+        len = strlen(ini_file_name) + 1;
+        the_init_file_name = (char*)malloc(len);
+        if( the_init_file_name )
+            memcpy(the_init_file_name, ini_file_name, len);
+        else
+            err = ERR_OUT_OF_MEMORY;
+        }
+    return err;
     }
 
 

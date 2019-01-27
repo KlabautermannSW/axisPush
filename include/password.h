@@ -29,7 +29,7 @@
 
     file        password.h
 
-    date        27.12.2018
+    date        27.1.2019
 
     author      Uwe Jantzen (jantzen@klabautermann-software.de)
 
@@ -65,7 +65,7 @@
 #define MAX_PASSWORD_LENGTH                     128
 
 
-extern ERRNO encode( void );
+extern void encode( void );
 extern ERRNO decode( char * * p_value, char * p_in );
 
 

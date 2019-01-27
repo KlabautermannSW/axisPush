@@ -70,7 +70,7 @@ typedef struct
 
 extern void set_debug( char set );
 extern char is_debug( void );
-extern void set_ini_file( char * ini_file_name );
+extern ERRNO set_ini_file( char * ini_file_name );
 extern char * ftp_server( void );
 extern char * user_name( void );
 extern char * user_key( void );
