@@ -29,7 +29,7 @@
 
     file        data.c
 
-    date        04.01.2019
+    date        27.01.2019
 
     author      Uwe Jantzen (jantzen@klabautermann-software.de)
 
@@ -72,6 +72,9 @@ static char * the_key = 0;
 static char * the_http_server = 0;
 static char * the_http_path = 0;
 static int the_second = 0;
+
+static Memory the_image;
+static char the_memory[IMAGE_SIZE];
 
 
 /*  function        void set_debug( char set )
@@ -194,7 +197,20 @@ int get_second( void )
     }
 
 
-/*  function        ERRNO Remove( char * str, char chr )
+/*  function        Memory * get_image_ptr( void )
+
+    brief           returns a pointer to the Memory struct that's to be used to
+                    hold the image.
+
+    return          Memory *
+*/
+Memory * get_image_ptr( void )
+    {
+    return &the_image;
+    }
+
+
+/*  function        static ERRNO _Remove( char * str, char chr )
 
     brief           Remove all occurences of chr in p_str.
                     Only if no errors occured the contents of str is changed.
@@ -204,7 +220,7 @@ int get_second( void )
 
     return          ERRNO, error code
 */
-ERRNO Remove( char * str, char chr )
+static ERRNO _Remove( char * str, char chr )
     {
     char * buffer;
     char * p_buffer;
@@ -309,11 +325,11 @@ ERRNO _GetEntry( FILE * p_file, char * p_section, char * p_key, char * p_val )
             {
             type = SECTION;
             strcpy(p_section, buffer);
-            Remove(p_section, 0x0d);
-            Remove(p_section, 0x0a);
-            Remove(p_section, ' ');
-            Remove(p_section, '[');
-            Remove(p_section, ']');
+            _Remove(p_section, 0x0d);
+            _Remove(p_section, 0x0a);
+            _Remove(p_section, ' ');
+            _Remove(p_section, '[');
+            _Remove(p_section, ']');
             if( the_debug_flag )
                 printf("data.c _GetEntry : SECTION %s\n", p_section);
             }
@@ -322,7 +338,7 @@ ERRNO _GetEntry( FILE * p_file, char * p_section, char * p_key, char * p_val )
             // from here on this must be a key
             type = KEY_VAL;
             strcpy(p_key, buffer);
-            Remove(p_key, ' ');
+            _Remove(p_key, ' ');
             len = (int)(strchr(p_key, '=') - p_key);
             if( len == 0 )                                                      // if equal the "=" is missing
                 {
@@ -333,9 +349,9 @@ ERRNO _GetEntry( FILE * p_file, char * p_section, char * p_key, char * p_val )
                 }
             strcpy(p_val, p_key + len + 1);                                     // value starts behinde the "="
             *(p_key + len) = 0x00;                                              // get key (everything in front of "=")
-            Remove(p_val, 0x0d);
-            Remove(p_val, 0x0a);
-            Remove(p_val, '"');
+            _Remove(p_val, 0x0d);
+            _Remove(p_val, 0x0a);
+            _Remove(p_val, '"');
             if( the_debug_flag )
                 printf("data.c _GetEntry :   SECTION = %s, KEY %s = %s\n", p_section, p_key, p_val);
             }
@@ -410,6 +426,10 @@ ERRNO Init( void )
         }
 
     fclose(p_inifile);
+
+    the_image.memory = the_memory;
+    memset(the_memory, 0, IMAGE_SIZE);
+
     return error;
     }
 

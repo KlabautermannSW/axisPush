@@ -29,7 +29,7 @@
 
     file        axisPush.c
 
-    date        27.12.2018
+    date        27.1.2019
 
     author      Uwe Jantzen (jantzen@klabautermann-software.de)
 
@@ -105,7 +105,7 @@ int WaitForNextMinute( void )
 int main( int argc, char *argv[] )
     {
     int i;
-    Memory image;
+    Memory * image;
     ERRNO result = NOERR;
 
     if( argc > 0 )
@@ -131,12 +131,14 @@ int main( int argc, char *argv[] )
         return result;
         }
 
+    image = get_image_ptr();
+
     for( ; ; )
         {
-        result = PullFile(&image);
+        result = PullFile(image);
         error(result);
 
-        result = PushFile(&image);
+        result = PushFile(image);
         error(result);
 
         WaitForNextMinute();

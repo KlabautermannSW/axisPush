@@ -29,7 +29,7 @@
 
     file        data.h
 
-    date        04.01.2019
+    date        27.01.2019
 
     author      Uwe Jantzen (jantzen@klabautermann-software.de)
 
@@ -58,6 +58,9 @@
 #include "errors.h"
 
 
+#define IMAGE_SIZE                  0x80000                                     // the hekp in the camera says: image size with lowest compression is ~250k,
+                                                                                // so 512k should be enough room to hold an image in all cases
+
 typedef struct
     {
     char * memory;
@@ -75,6 +78,7 @@ extern char * ftp_path( void );
 extern char * http_server( void );
 extern char * http_path( void );
 extern int get_second( void );
+extern Memory * get_image_ptr( void );
 extern ERRNO Init( void );
 extern void DeInit( void );
 

@@ -29,7 +29,7 @@
 
     file        ftp.c
 
-    date        27.12.2018
+    date        27.1.2019
 
     author      Uwe Jantzen (jantzen@klabautermann-software.de)
 
@@ -58,6 +58,9 @@
 #include "data.h"
 
 
+static char * the_ftp_ptr = 0;
+
+
 /*  function        static size_t _read_callback( void * ptr, size_t size, size_t nmemb, void * stream )
 
     brief           copies a part of the string that is to be sent over the ftp connection
@@ -82,8 +85,8 @@ static size_t _read_callback( void * ptr, size_t size, size_t nmemb, void * stre
         {
         if( bytesToWrite > mem->size )
             bytesToWrite = mem->size;
-        memcpy(ptr, mem->memory, bytesToWrite);
-        mem->memory += bytesToWrite;
+        memcpy(ptr, the_ftp_ptr, bytesToWrite);
+        the_ftp_ptr += bytesToWrite;
         mem->size -= bytesToWrite;
         return bytesToWrite;
         }
@@ -105,7 +108,6 @@ ERRNO PushFile( Memory * image )
     CURL * curl = 0;
     char remote_url[420];
     char name_pass[272];
-    char * p_memory = image->memory;
 
     if( strlen(ftp_server()) == 0 )
         return ERR_NO_FTP_SERVER;
@@ -122,6 +124,9 @@ ERRNO PushFile( Memory * image )
         error = ERR_CURL_EASY_INIERROR;
         goto end_PushFile;
         }
+
+    the_ftp_ptr = image->memory;
+
     debug("Curl initialized\n");
 
     error = ERR_CURL_SETOPERROR;
@@ -154,9 +159,6 @@ ERRNO PushFile( Memory * image )
     if( curl_easy_perform(curl) )                                               // Now run off and do what you've been told!
         error = ERR_CURL_PERFORM_ERROR;
     debug("Curl performed\n");
-    image->memory = p_memory;                                                   // restore memory pointer
-
-    free(image->memory);
 
 setopt_PushFile:
     curl_easy_cleanup(curl);                                                    // always cleanup

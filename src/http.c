@@ -29,7 +29,7 @@
 
     file        http.c
 
-    date        27.12.2018
+    date        27.1.2019
 
     author      Uwe Jantzen (jantzen@klabautermann-software.de)
 
@@ -74,18 +74,11 @@ static size_t _WriteCallback( void * contents, size_t size, size_t nmemb, void *
     Memory * mem = (Memory *)userp;
     size_t bytesToRead = size * nmemb;
 
-    char *ptr = realloc(mem->memory, mem->size + bytesToRead + 1);
-    if( ptr == NULL )
-        {
-        /* out of memory! */
-        error(ERR_OUT_OF_MEMORY);
+    if( (mem->size + bytesToRead) > IMAGE_SIZE )                                 // just in case
         return 0;
-        }
 
-    mem->memory = ptr;
     memcpy(&(mem->memory[mem->size]), contents, bytesToRead);
     mem->size += bytesToRead;
-    mem->memory[mem->size] = 0;
 
     return bytesToRead;
     }
@@ -105,7 +98,6 @@ ERRNO PullFile( Memory * image )
     CURLcode res;
     char url[420];
 
-    image->memory = malloc(1);  /* will be grown as needed by the realloc above */
     image->size = 0;    /* no data at this point */
 
     curl_handle = curl_easy_init();
