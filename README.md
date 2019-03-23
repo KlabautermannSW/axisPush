@@ -5,7 +5,7 @@ Then it pushes it to a web server using ftp protocol.
 
 ## Why Doing This?
 
-Many years ago I got two AXIS 2110 ip cameras which where expensive
+Many years ago I got two AXIS 2110 ip cameras which were expensive
 those days. They worked fine over a couple of years, pushing their images to
 my web server via ftp.
 
@@ -13,12 +13,12 @@ This year I changed my internet provider so I got a new account, password and
 server name. When updating these data to a camera no ftp transfer was started
 any more. I tried two cameras with the same result. Even after resetting them to
 factory default nothing worked better. Also using a script and the scheduler
-does not result in a picture on the web server.
+in the camera does not result in a picture on the web server.
 
 But I have some [Raspberry Pis](http://www.raspberrypi.org/) working on weather
 data logging what is a boring and very small job to do for a linux computer.
 
-So I decided to write a little program doing the work the cameras will not do.
+So I decided to write a little program doing the work the cameras do not do.
 
 ## The Program
 
@@ -45,7 +45,7 @@ If no configuration file name is given the file "conf/axisPush.conf" is used.
 ## The Configuration File
 
 The configuration file has several sections that are described in the next paragraphs.
-A line beginning with the “#” character is interpreted as a single line comment.
+A line starting with the “#” character is interpreted as a single line comment.
 
 ### [FTP]
 
@@ -111,13 +111,14 @@ Example:
 ### [Timer]
 
 ```
-s = 0
+s =
 ```
 
 #### s
 
-This is the second in every minute when the transfer is started. Range for the
-start second is from s to s+4.
+This is the second in every minute when the transfer is started. The value must be in the range from 0 to 54.
+
+The transfer really starts at s to s+4.
 
 ## Using The Program As A Systemd Service
 
@@ -129,10 +130,10 @@ service will recall the program immediately over and over again!_**
 
 ### Setting The Service
 
-_Everything in this paragraph has to be done with superuser rights!_
+_Everything in this paragraph has to be done with superuser priviledges!_
 
 First you need a service file at /usr/lib/systemd/system named axisPush.service.
-A sample can be found in the directory systemd.
+A sample can be found here in the directory systemd.
 
 Then set the security flags as follows:
 ```
