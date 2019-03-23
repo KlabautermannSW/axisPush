@@ -29,7 +29,7 @@
 
     file        data.c
 
-    date        27.01.2019
+    date        23.03.2019
 
     author      Uwe Jantzen (jantzen@klabautermann-software.de)
 
@@ -431,7 +431,7 @@ ERRNO Init( void )
             int s;
 
             sscanf(val, "%d", &s);
-            if( ( s >= 0 ) && ( s < 60 ) )
+            if( ( s >= 0 ) && ( s < 54 ) )
                 the_second = s;
             else
                 error = ERR_ILL_TIMER_SECOND;
